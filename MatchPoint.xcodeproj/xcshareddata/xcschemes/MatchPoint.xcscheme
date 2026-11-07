@@ -17,6 +17,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "91C57B7A309E8563005654B9"
                BuildableName = "MatchPoint.app"
+               BlueprintName = "MatchPoint"
                ReferencedContainer = "container:MatchPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,6 +47,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "91C57B7A309E8563005654B9"
             BuildableName = "MatchPoint.app"
+            BlueprintName = "MatchPoint"
             ReferencedContainer = "container:MatchPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,6 +64,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "91C57B7A309E8563005654B9"
             BuildableName = "MatchPoint.app"
+            BlueprintName = "MatchPoint"
             ReferencedContainer = "container:MatchPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

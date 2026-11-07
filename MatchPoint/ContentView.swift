@@ -1,12 +1,12 @@
 
 import SwiftUI
 import WebKit
-
+import fliclib
 
 struct ContentView: View {
     @State private var comandoTest = 0
     @State private var numeroComando = 0
-
+    @State private var mostraBluetooth = false
     var body: some View {
         VStack(spacing: 0) {
             MatchPointWebView(
@@ -14,9 +14,23 @@ struct ContentView: View {
                 numeroComando: numeroComando
             )
             .ignoresSafeArea(edges: .horizontal)
-
-           
+            .onAppear {
+                FlicManager.shared.preparaBluetooth()
+            }
+            .sheet(isPresented: $mostraBluetooth) {
+                BluetoothView()
+            }
             HStack {
+                
+                Button {
+                    mostraBluetooth = true
+                } label: {
+                    Label("Dispositivi Bluetooth", systemImage: "bluetooth")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .padding(.horizontal, 8)
+
                 Button("Punto A") {
                     comandoTest = 1
                     numeroComando += 1

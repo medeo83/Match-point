@@ -11,8 +11,29 @@
     ],
   },
   "files": [
-    { "kind": "folder", "path": "MatchPoint", "target-membership": [ "MatchPoint" ] },
     {
+      "kind": "folder",
+      "path": "MatchPoint",
+      "target-membership": [
+        "MatchPoint",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "MatchPoint",
+          "exclusions": [
+            "Info.plist",
+          ],
+        }, {
+          "build-phase": "MatchPoint/copy/Embed Frameworks",
+          "inclusions": [
+            "fliclib.xcframework",
+          ],
+          "attributes": {
+            "fliclib.xcframework": { "code-sign-on-copy": true, "header-preservation": "remove-on-copy" },
+          },
+        },
+      ],
+    }, {
       "kind": "group",
       "name": "Products",
       "children": [
@@ -30,15 +51,23 @@
         "compile-sources",
         "frameworks",
         "resources",
+        {
+          "kind": "copy",
+          "name": "Embed Frameworks",
+          "bundle-base-path": "frameworks-directory",
+        },
       ],
       "build-settings": {
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
+        "CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES": "YES",
         "CODE_SIGN_STYLE": "Automatic",
         "CURRENT_PROJECT_VERSION": "1",
         "DEVELOPMENT_TEAM": "8Y8R7JK34Y",
         "ENABLE_PREVIEWS": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
+        "INFOPLIST_FILE": "MatchPoint/Info.plist",
+        "INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription": "MATCH POINT utilizza il Bluetooth per collegare i pulsanti Flic e controllare il punteggio durante le partite.",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation": "YES",
         "INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents": "YES",
         "INFOPLIST_KEY_UILaunchScreen_Generation": "YES",
