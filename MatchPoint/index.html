@@ -6,8 +6,15 @@ function playSignal(kind='point'){
   try {
     const AudioCtx=window.AudioContext||window.webkitAudioContext;
     if(!AudioCtx)return;
-    if(!audioContext)audioContext=new AudioCtx();
-    if(audioContext.state==='suspended')audioContext.resume();
+    if(!audioContext || audioContext.state==='closed'){
+        audioContext=new AudioCtx();
+    }
+    if(audioContext.state!=='running'){
+        audioContext.resume()
+            .then(() => playSignal(kind))
+            .catch(err => console.warn('Ripresa audio fallita', err));
+        return;
+    }
     const volume=Number($('soundVolume').value)/100;
     if(volume===0)return;
     const mode=$('soundType').value;
@@ -30,4 +37,18 @@ function playSignal(kind='point'){
     });
   }catch(err){console.warn('Audio non disponibile',err)}
 }
-function score(w){if(state.done)return;history.push(JSON.parse(JSON.stringify(state)));let other=1-w;if(state.tb){state.p[w]++;if(state.p[w]>=7&&state.p[w]-state.p[other]>=2)finishGame(w)}else{state.p[w]++;if($('noad').checked){if(state.p[w]>=4)finishGame(w)}else if(state.p[w]>=4&&state.p[w]-state.p[other]>=2)finishGame(w)}if(!state.done&&!state.tb&&state.g[0]===6&&state.g[1]===6){state.tb=true;state.p=[0,0]}persist();render();playSignal('point')}function showPoint(w){if(state.tb)return String(state.p[w]);let p=state.p;if(p[w]>=4&&p[w]>p[1-w])return 'AD';return ['0','15','30','40'][Math.min(p[w],3)]}function render(){$('labelA').textContent=$('nameA').value||'Giocatore A';$('labelB').textContent=$('nameB').value||'Giocatore B';$('pointA').textContent='+ Punto '+$('labelA').textContent;$('pointB').textContent='+ Punto '+$('labelB').textContent;$('pointsA').textContent=showPoint(0);$('pointsB').textContent=showPoint(1);$('sets').textContent=state.s.join(' – ');$('games').textContent=state.g.join(' – ');$('tb').textContent=state.tb?state.p.join(' – '):'—';$('status').textContent=state.done?'🏆 Vittoria: '+(state.winner===0?$('labelA').textContent:$('labelB').textContent):state.tb?'Tie-break':state.completed.length?'Set conclusi: '+state.completed.map(x=>x.join('–')).join(' · '):'Partita in corso';$('pointA').disabled=state.done;$('pointB').disabled=state.done}function reset(){state=fresh();history=[];persist();render()}['nameA','nameB'].forEach(id=>{const field=$(id);field.addEventListener('focus',()=>field.select());field.addEventListener('click',()=>field.select());field.addEventListener('input',()=>{persist();render()});});['soundEnabled','soundType'].forEach(id=>$(id).addEventListener('change',persist));$('soundVolume').addEventListener('input',()=>{$('volumeValue').textContent=$('soundVolume').value+'%';persist()});$('testSound').onclick=()=>playSignal('point');$('pointA').onclick=()=>score(0);$('pointB').onclick=()=>score(1);function undoPoint(){if(history.length){state=history.pop();persist();render();playSignal('undo')}}$('undo').onclick=undoPoint;$('undoMatch').onclick=undoPoint;$('reset').onclick=()=>{if(confirm('Iniziare una nuova partita?'))reset()};$('apply').onclick=()=>{if(confirm('Applicare le impostazioni e azzerare il punteggio?')){reset();$('settings').classList.add('hidden')}};$('settingsBtn').onclick=()=>$('settings').classList.toggle('hidden');$('startMatch').onclick=()=>{document.body.classList.add('match-mode');window.scrollTo(0,0);};$('exitMatch').onclick=()=>{document.body.classList.remove('match-mode');$('settings').classList.remove('hidden');};$('dismissHint').onclick=()=>{$('rotateHint').style.display='none'};load();render();</script></body></html>
+function score(w){if(state.done)return;history.push(JSON.parse(JSON.stringify(state)));let other=1-w;if(state.tb){state.p[w]++;if(state.p[w]>=7&&state.p[w]-state.p[other]>=2)finishGame(w)}else{state.p[w]++;if($('noad').checked){if(state.p[w]>=4)finishGame(w)}else if(state.p[w]>=4&&state.p[w]-state.p[other]>=2)finishGame(w)}if(!state.done&&!state.tb&&state.g[0]===6&&state.g[1]===6){state.tb=true;state.p=[0,0]}persist();render();playSignal('point')}function showPoint(w){if(state.tb)return String(state.p[w]);let p=state.p;if(p[w]>=4&&p[w]>p[1-w])return 'AD';return ['0','15','30','40'][Math.min(p[w],3)]}function render(){$('labelA').textContent=$('nameA').value||'Giocatore A';$('labelB').textContent=$('nameB').value||'Giocatore B';$('pointA').textContent='+ Punto '+$('labelA').textContent;$('pointB').textContent='+ Punto '+$('labelB').textContent;$('pointsA').textContent=showPoint(0);$('pointsB').textContent=showPoint(1);$('sets').textContent=state.s.join(' – ');$('games').textContent=state.g.join(' – ');$('tb').textContent=state.tb?state.p.join(' – '):'—';$('status').textContent=state.done?'🏆 Vittoria: '+(state.winner===0?$('labelA').textContent:$('labelB').textContent):state.tb?'Tie-break':state.completed.length?'Set conclusi: '+state.completed.map(x=>x.join('–')).join(' · '):'Partita in corso';$('pointA').disabled=state.done;$('pointB').disabled=state.done}function reset(){state=fresh();history=[];persist();render()}['nameA','nameB'].forEach(id=>{const field=$(id);field.addEventListener('focus',()=>field.select());field.addEventListener('click',()=>field.select());field.addEventListener('input',()=>{persist();render()});});['soundEnabled','soundType'].forEach(id=>$(id).addEventListener('change',persist));$('soundVolume').addEventListener('input',()=>{$('volumeValue').textContent=$('soundVolume').value+'%';persist()});$('testSound').onclick=()=>playSignal('point');$('pointA').onclick=()=>score(0);$('pointB').onclick=()=>score(1);function undoPoint(){if(history.length){state=history.pop();persist();render();playSignal('undo')}}$('undo').onclick=undoPoint;$('undoMatch').onclick=undoPoint;$('reset').onclick=()=>{if(confirm('Iniziare una nuova partita?'))reset()};$('apply').onclick=()=>{if(confirm('Applicare le impostazioni e azzerare il punteggio?')){reset();$('settings').classList.add('hidden')}};$('settingsBtn').onclick=()=>$('settings').classList.toggle('hidden');$('startMatch').onclick=()=>{
+    document.body.classList.add('match-mode');
+    window.scrollTo(0,0);
+
+    if (window.webkit?.messageHandlers?.matchPointOrientation) {
+        window.webkit.messageHandlers.matchPointOrientation.postMessage('landscape');
+    }
+};$('exitMatch').onclick=()=>{
+    document.body.classList.remove('match-mode');
+    $('settings').classList.remove('hidden');
+
+    if (window.webkit?.messageHandlers?.matchPointOrientation) {
+        window.webkit.messageHandlers.matchPointOrientation.postMessage('portrait');
+    }
+};$('dismissHint').onclick=()=>{$('rotateHint').style.display='none'};load();render();</script></body></html>

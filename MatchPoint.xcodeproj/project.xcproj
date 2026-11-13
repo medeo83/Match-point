@@ -22,15 +22,20 @@
           "target": "MatchPoint",
           "exclusions": [
             "Info.plist",
-          ],
-        }, {
-          "build-phase": "MatchPoint/copy/Embed Frameworks",
-          "inclusions": [
             "fliclib.xcframework",
           ],
-          "attributes": {
-            "fliclib.xcframework": { "code-sign-on-copy": true, "header-preservation": "remove-on-copy" },
-          },
+        },
+      ],
+    }, {
+      "kind": "group",
+      "name": "Frameworks",
+      "children": [
+        {
+          "path": "../../flic2lib-ios-master/flic2lib.xcframework",
+          "target-membership": [
+            "MatchPoint/frameworks",
+            { "build-phase": "MatchPoint/copy/Embed Frameworks", "code-sign-on-copy": true, "header-preservation": "remove-on-copy" },
+          ],
         },
       ],
     }, {
@@ -68,11 +73,13 @@
         "GENERATE_INFOPLIST_FILE": "YES",
         "INFOPLIST_FILE": "MatchPoint/Info.plist",
         "INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription": "MATCH POINT utilizza il Bluetooth per collegare i pulsanti Flic e controllare il punteggio durante le partite.",
+        "INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription": "MATCH POINT utilizza il Bluetooth per comunicare con i pulsanti Flic 2.",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation": "YES",
         "INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents": "YES",
         "INFOPLIST_KEY_UILaunchScreen_Generation": "YES",
         "INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad": "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight",
         "INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone": "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight",
+        "IPHONEOS_DEPLOYMENT_TARGET": "17.6",
         "LD_RUNPATH_SEARCH_PATHS": [
           "$(inherited)",
           "@executable_path/Frameworks",

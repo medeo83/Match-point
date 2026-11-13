@@ -4,8 +4,8 @@ import SwiftUI
 struct BluetoothView: View {
     @Environment(\.dismiss) private var dismiss
 
-    private var bluetooth = FlicManager.shared
-
+    @State private var flic2 = Flic2Manager.shared
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -17,35 +17,26 @@ struct BluetoothView: View {
                 Text("Bluetooth MATCH POINT")
                     .font(.title2.bold())
 
-                Text(bluetooth.statoBluetooth)
+              
                     .foregroundStyle(.secondary)
-                HStack(spacing: 10) {
-                   
-                    Image(systemName: "circle.fill")
-                        .font(.system(size: 10))
-                        .foregroundStyle(
-                            bluetooth.statoConnessione.hasPrefix("Collegato a")
-                                ? .green
-                                : bluetooth.statoConnessione == "Connessione in corso..."
-                                    ? .orange
-                                    : .gray
-                        )
-
-
-                    Text(bluetooth.statoConnessione)
-                        .font(.subheadline)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-                .background(.regularMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-
+              
                 VStack(alignment: .leading, spacing: 12) {
-                    Label("Flic 1", systemImage: "circle.dotted")
+                    Label("Comandi · Modalità 1 pulsante", systemImage: "hand.tap")
 
                     Text("Clic singolo → Punto A")
                     Text("Doppio clic → Punto B")
                     Text("Pressione lunga → Annulla")
+                    Divider()
+                        .padding(.vertical, 6)
+
+                    Label("Modalità 2 pulsanti", systemImage: "circle.grid.2x1")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.secondary)
+
+                    Text("Disponibile prossimamente: un Flic 2 per ciascuna squadra.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -54,88 +45,61 @@ struct BluetoothView: View {
 
                 
                 Button {
-                    bluetooth.cercaDispositivi()
+                    Flic2Manager.shared.cercaFlic2()
                 } label: {
-                    Label("Cerca dispositivi", systemImage: "magnifyingglass")
+                    Label("Aggiungi Flic 2", systemImage: "plus.circle")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(bluetooth.statoBluetooth == "Bluetooth non disponibile")
 
+    
                 
-                if let preferito = bluetooth.dispositivoSelezionato {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label("Dispositivo preferito", systemImage: "star.fill")
-                            .font(.headline)
+                VStack(alignment: .leading, spacing: 14) {
 
-                        Text(preferito)
+                    Label("Dispositivi associati", systemImage: "link")
+                        .font(.headline)
+
+                    HStack(spacing: 14) {
+
+                        Image(systemName: "circle.circle.fill")
+                            .font(.system(size: 30))
+                            .foregroundStyle(.blue)
+
+                        VStack(alignment: .leading, spacing: 5) {
+
+                            Text(flic2.nomePulsante)
+                                .font(.headline)
+
+                            Label(
+                                flic2.flicPronto
+                                    ? "Pronto"
+                                    : (flic2.flicInConnessione
+                                        ? "In attesa di connessione"
+                                        : "Non connesso"),
+                                systemImage: flic2.flicPronto
+                                    ? "checkmark.circle.fill"
+                                    : (flic2.flicInConnessione
+                                        ? "arrow.triangle.2.circlepath"
+                                        : "xmark.circle.fill")
+                            )
                             .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(3)
-
-                        Label("Memorizzato, non necessariamente collegato",
-                              systemImage: "info.circle")
-                            .font(.caption)
-                            .foregroundStyle(.orange)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(.regularMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 14))
-                }
-
-                Text("Dispositivi rilevati")
-                    .font(.headline)
-
-                if bluetooth.dispositiviRilevati.isEmpty {
-                    Text("Nessun dispositivo rilevato")
-                        .foregroundStyle(.secondary)
-                } else {
-                   
-              
-                    List(bluetooth.dispositiviRilevati, id: \.self) { dispositivo in
-                        VStack(alignment: .leading, spacing: 10) {
-
-                            Button {
-                                bluetooth.selezionaDispositivo(dispositivo)
-                            } label: {
-                                HStack {
-                                    Label(dispositivo, systemImage: "bluetooth")
-                                        .foregroundStyle(.primary)
-
-                                    Spacer()
-
-                                    if bluetooth.dispositivoSelezionato == dispositivo {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .foregroundStyle(.green)
-                                    }
-                                }
-                            }
-                            .buttonStyle(.plain)
-
-                            HStack {
-                                Button {
-                                    bluetooth.collegaDispositivo(dispositivo)
-                                } label: {
-                                    Label("Collega", systemImage: "link")
-                                }
-                                .buttonStyle(.bordered)
-
-                                Button {
-                                    bluetooth.scollegaDispositivo(dispositivo)
-                                } label: {
-                                    Label("Scollega", systemImage: "xmark.circle")
-                                }
-                                .buttonStyle(.bordered)
-                                .tint(.red)
-                            }
-                            .font(.caption)
+                            .foregroundStyle(
+                                flic2.flicPronto
+                                    ? Color.green
+                                    : (flic2.flicInConnessione
+                                        ? Color.orange
+                                        : Color.red)
+                            )
                         }
-                        .padding(.vertical, 4)
+
+                        Spacer()
                     }
-
-
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(16)
+                .background(.regularMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                
 
                 Spacer()
             }
