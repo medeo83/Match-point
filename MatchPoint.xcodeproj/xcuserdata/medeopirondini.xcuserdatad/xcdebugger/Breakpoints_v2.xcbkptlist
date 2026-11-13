@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4D56DD14-121E-419B-957F-7C2EBF3AB2E4"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MatchPoint/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "Coordinator"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - 35aeae9fe37c4873"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MatchPoint.MatchPointWebView.Coordinator.webView(_: __C.WKWebView, runJavaScriptConfirmPanelWithMessage: Swift.String, initiatedByFrame: __C.WKFrameInfo, completionHandler: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "MatchPoint.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161">
+               </Location>
+               <Location
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - b67a949c7fa06bee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in MatchPoint.MatchPointWebView.Coordinator.userContentController(_: __C.WKUserContentController, didReceive: __C.WKScriptMessage) -&gt; ()"
+                  moduleName = "MatchPoint.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161">
+               </Location>
+               <Location
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - 2d5f96930e87ea8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MatchPoint.MatchPointWebView.Coordinator.__allocating_init() -&gt; MatchPoint.MatchPointWebView.Coordinator"
+                  moduleName = "MatchPoint.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - e31af847a720f8fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MatchPoint.MatchPointWebView.Coordinator.init() -&gt; MatchPoint.MatchPointWebView.Coordinator"
+                  moduleName = "MatchPoint.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161">
+               </Location>
+               <Location
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - d0acf95134f8d40a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MatchPoint.MatchPointWebView.Coordinator.__isolated_deallocating_deinit"
+                  moduleName = "MatchPoint.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161">
+               </Location>
+               <Location
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - 3efca579a31177cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MatchPoint.MatchPointWebView.Coordinator.__deallocating_deinit"
+                  moduleName = "MatchPoint.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

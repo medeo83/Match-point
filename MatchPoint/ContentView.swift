@@ -20,14 +20,18 @@ func configuraAudioMatchPoint() {
 }
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var comandoTest = 0
     @State private var numeroComando = 0
     @State private var mostraBluetooth = false
+    @State private var partitaInCorso = false
+    
     var body: some View {
         VStack(spacing: 0) {
             MatchPointWebView(
                 comandoTest: comandoTest,
-                numeroComando: numeroComando
+                numeroComando: numeroComando,
+                partitaInCorso: $partitaInCorso
             )
             .ignoresSafeArea(edges: .horizontal)
             .onAppear {
@@ -36,35 +40,38 @@ struct ContentView: View {
             .sheet(isPresented: $mostraBluetooth) {
                 BluetoothView()
             }
-            HStack {
+            
+            if !partitaInCorso {
+                HStack {
+                    Button {
+                        mostraBluetooth = true
+                    } label: {
+                        Label("Dispositivi Bluetooth", systemImage: "bluetooth")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .padding(.horizontal, 8)
+                }
                 
-                Button {
-                    mostraBluetooth = true
-                } label: {
-                    Label("Dispositivi Bluetooth", systemImage: "bluetooth")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .padding(.horizontal, 8)
-
-                Button("Punto A") {
-                    comandoTest = 1
-                    numeroComando += 1
-                }
-
-                Button("Punto B") {
-                    comandoTest = 2
-                    numeroComando += 1
-                }
-
-                Button("Annulla") {
-                    comandoTest = 3
-                    numeroComando += 1
-                }
+                .buttonStyle(.borderedProminent)
+                .padding(8)
             }
-            .buttonStyle(.borderedProminent)
-            .padding(8)
+        }
+        .onChange(of: scenePhase) { _, nuovaFase in
+            guard nuovaFase == .active, partitaInCorso else { return }
 
+            guard let scena = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive })
+            else { return }
+
+            let richiesta = UIWindowScene.GeometryPreferences.iOS(
+                interfaceOrientations: .landscape
+            )
+
+            scena.requestGeometryUpdate(richiesta) { errore in
+                print("MATCH POINT: Errore ripristino rotazione = \(errore)")
+            }
         }
     }
 }
@@ -74,8 +81,10 @@ struct MatchPointWebView: UIViewRepresentable {
 
     var comandoTest: Int
     var numeroComando: Int
+    @Binding var partitaInCorso: Bool
+    
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(partitaInCorso: $partitaInCorso)
     }
 
     func makeUIView(context: Context) -> WKWebView {
@@ -151,6 +160,12 @@ struct MatchPointWebView: UIViewRepresentable {
 
     class Coordinator: NSObject, WKUIDelegate, WKScriptMessageHandler {
         var ultimoComando = 0
+        var partitaInCorso: Binding<Bool>
+
+        init(partitaInCorso: Binding<Bool>) {
+            self.partitaInCorso = partitaInCorso
+            super.init()
+        }
         
         func userContentController(
             _ userContentController: WKUserContentController,
@@ -160,6 +175,9 @@ struct MatchPointWebView: UIViewRepresentable {
                   let comando = message.body as? String else { return }
 
             DispatchQueue.main.async {
+                self.partitaInCorso.wrappedValue = (comando == "landscape")
+                UIApplication.shared.isIdleTimerDisabled = (comando == "landscape")
+                
                 let orientamento: UIInterfaceOrientationMask =
                     comando == "landscape" ? .landscape : .portrait
 
