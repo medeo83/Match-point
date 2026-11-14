@@ -14,39 +14,11 @@
             filePath = "MatchPoint/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "Coordinator"
             landmarkType = "3">
             <Locations>
-               <Location
-                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - 35aeae9fe37c4873"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MatchPoint.MatchPointWebView.Coordinator.webView(_: __C.WKWebView, runJavaScriptConfirmPanelWithMessage: Swift.String, initiatedByFrame: __C.WKFrameInfo, completionHandler: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "MatchPoint.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161">
-               </Location>
-               <Location
-                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - b67a949c7fa06bee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in MatchPoint.MatchPointWebView.Coordinator.userContentController(_: __C.WKUserContentController, didReceive: __C.WKScriptMessage) -&gt; ()"
-                  moduleName = "MatchPoint.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161">
-               </Location>
                <Location
                   uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - 2d5f96930e87ea8"
                   shouldBeEnabled = "Yes"
@@ -62,7 +34,7 @@
                   endingLineNumber = "0">
                </Location>
                <Location
-                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - e31af847a720f8fc"
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - e31af847a720f827"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -72,11 +44,11 @@
                   urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161">
+                  startingLineNumber = "166"
+                  endingLineNumber = "166">
                </Location>
                <Location
-                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - d0acf95134f8d40a"
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - d0acf95134f8d4d1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -86,11 +58,11 @@
                   urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161">
+                  startingLineNumber = "166"
+                  endingLineNumber = "166">
                </Location>
                <Location
-                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - 3efca579a31177cf"
+                  uuid = "A7838DFD-129A-4939-A51B-DFCCC0A29352 - 3efca579a3117714"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -100,8 +72,8 @@
                   urlString = "file:///Users/medeopirondini/Desktop/MatchPoint%20App/MatchPoint/MatchPoint/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161">
+                  startingLineNumber = "166"
+                  endingLineNumber = "166">
                </Location>
             </Locations>
          </BreakpointContent>

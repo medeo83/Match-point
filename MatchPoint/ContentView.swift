@@ -97,6 +97,11 @@ struct MatchPointWebView: UIViewRepresentable {
             name: "matchPointOrientation"
         )
         
+        webView.configuration.userContentController.add(
+            context.coordinator,
+            name: "matchPointAudio"
+        )
+        
         Flic2Manager.shared.onPuntoA = { [weak webView] in
             DispatchQueue.main.async {
                 guard let webView = webView else { return }
@@ -171,6 +176,14 @@ struct MatchPointWebView: UIViewRepresentable {
             _ userContentController: WKUserContentController,
             didReceive message: WKScriptMessage
         ) {
+            if message.name == "matchPointAudio" {
+                if let abilitato = message.body as? Bool {
+                    MatchPointAudio.shared.suonoAbilitato = abilitato
+                    print("MATCH POINT: Audio abilitato = \(abilitato)")
+                }
+                return
+            }
+            
             guard message.name == "matchPointOrientation",
                   let comando = message.body as? String else { return }
 

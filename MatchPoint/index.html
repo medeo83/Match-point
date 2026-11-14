@@ -68,6 +68,12 @@ function score(w){if(state.done)return;history.push(JSON.parse(JSON.stringify(st
     $(id).addEventListener('change',()=>{
         persist();
         render();
+
+        if(id === 'soundEnabled'){
+            window.webkit?.messageHandlers?.matchPointAudio?.postMessage(
+                $('soundEnabled').checked
+            );
+        }
     });
 });$('testSound').onclick=()=>playSignal('point');$('pointA').onclick=()=>score(0);$('pointB').onclick=()=>score(1);function undoPoint(){if(history.length){state=history.pop();persist();render();playSignal('undo')}}$('undo').onclick=undoPoint;$('undoMatch').onclick=undoPoint;$('reset').onclick=()=>{
     if(confirm('Iniziare una nuova partita?')){
@@ -88,4 +94,13 @@ function score(w){if(state.done)return;history.push(JSON.parse(JSON.stringify(st
     if (window.webkit?.messageHandlers?.matchPointOrientation) {
         window.webkit.messageHandlers.matchPointOrientation.postMessage('portrait');
     }
-};$('dismissHint').onclick=()=>{$('rotateHint').style.display='none'};load();render();</script></body></html>
+};$('dismissHint').onclick=()=>{
+    $('rotateHint').style.display='none';
+};
+
+load();
+render();
+
+window.webkit?.messageHandlers?.matchPointAudio?.postMessage(
+    $('soundEnabled').checked
+);</script></body></html>

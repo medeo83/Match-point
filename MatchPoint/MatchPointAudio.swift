@@ -3,6 +3,7 @@ import AVFoundation
 
 final class MatchPointAudio {
     static let shared = MatchPointAudio()
+    var suonoAbilitato = true
 
     private var playerPunto: AVAudioPlayer?
     private var playerAnnulla: AVAudioPlayer?
@@ -56,6 +57,7 @@ final class MatchPointAudio {
     }
 
 func suonaPunto() {
+    guard suonoAbilitato else { return }
     guard let player = playerPunto else { return }
 
     if player.isPlaying {
@@ -70,6 +72,7 @@ func suonaPunto() {
     print("MATCH POINT AUDIO: Riproduzione avviata = \(avviato)")
 }
     func suonaAnnulla() {
+        guard suonoAbilitato else { return }
         playerAnnulla?.currentTime = 0
         playerAnnulla?.play()
     }
